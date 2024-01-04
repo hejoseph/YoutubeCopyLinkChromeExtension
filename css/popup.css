@@ -1,0 +1,32 @@
+.textarea-container {
+    display: flex;
+    justify-content: space-between;
+    /* or any other spacing style you prefer */
+}
+
+textarea#listLinks {
+    display: block;
+    overflow: hidden;
+    resize: none;
+}
+
+.text-area-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.text-area-wrapper {
+    text-align: center;
+    justify-content: space-between;
+}
+
+textarea {
+    display: block;
+    margin-top: 5px;
+}
+
+#copyMessage{
+    color : green;
+    display : none;
+}

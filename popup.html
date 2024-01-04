@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Copy youtube links</title>
+  <link rel="stylesheet" type="text/css" href="css/popup.css">
+  <style>
+    body {
+      min-width: 600px;
+      font-size: 15px;
+    }
+
+    textarea {
+      margin: 5px;
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Youtube Links Copy</h2>
+  <!-- <h3>Countries</h3>
+  <form id="form"></form> -->
+  <div>
+    <div class="textarea-container">
+      <div>
+        <label for="params">Params</label>
+        <textarea id="params" placeholder="list of params" cols="30"></textarea>
+        <button id="save">Save Params</button>
+      </div>
+      <div>
+        <label for="listLinks">List Links</label>
+        <textarea id="listLinks" placeholder="list of youtube links" cols="50"></textarea>
+        <button id="clear">Clear Links</button>
+        <button id="copy" >Copy Links</button> <span id="copyMessage">Copy success !</span>
+      </div>
+    </div>
+  </div>
+  <script src="js/popup.js" type="module"></script>
+</body>
+
+</html>
