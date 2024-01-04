@@ -1,6 +1,6 @@
 ## Overview
 
-This chrome extension is useful for the YoutubeDownloader tool in my repo : https://github.com/hejoseph/YoutubeDownloader.
+This chrome extension is useful for the YoutubeDownloader tool in my repo : https://github.com/hejoseph/YoutubeDownloader?tab=readme-ov-file#example-when-using-a-list-file-
 
 When browsing Youtube.com, you want to save the video link somewhere and classify it : The extension lets you classify your youtube links as follow :
 ![youtube links](readme_images/1.png)
