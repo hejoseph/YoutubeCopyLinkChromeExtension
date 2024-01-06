@@ -71,6 +71,7 @@ copy.addEventListener('click', copyContent);
 
 clear.addEventListener('click', function(event){
   listLinksTextArea.value = "";
+  chrome.storage.sync.set({listLinks:{}});
 });
 
 listLinksTextArea.addEventListener("input", function(e){
