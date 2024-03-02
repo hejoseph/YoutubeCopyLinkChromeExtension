@@ -1,9 +1,9 @@
 {
   "name": "Youtube Links Copy",
   "description": "Help you classify youtube links for download later",
-  "version": "1.0",
+  "version": "1.1",
   "manifest_version": 3,
-  "permissions": ["activeTab","contextMenus", "storage"],
+  "permissions": ["activeTab","contextMenus", "storage", "unlimitedStorage"],
   "background": {
     "service_worker": "background.js",
     "type": "module"
@@ -14,7 +14,8 @@
   "content_scripts": [
     {
       "matches": ["https://www.youtube.com/*"],
-      "js": ["js/content.js"]
+      "js": ["js/content.js"],
+      "run_at": "document_idle"
     }
   ],
   "icons": {

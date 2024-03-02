@@ -82,14 +82,14 @@ chrome.contextMenus.onClicked.addListener((item, tab) => {
   const matched = url.match(regex);
   const video_id = matched ? matched[1] : null;
   if(video_id!=null){
-    chrome.storage.sync.get("ids", function (promise) {
-      let idsArr = [];
-      if(idsArr.length!=0){
-        promise.ids.split("\n")
+    chrome.storage.local.get("ids", function (promise) {
+      let idsArr = promise.ids;
+      if(!idsArr) {
+        idsArr = [];
       }
       idsArr.push(video_id);
       let newIdsArr = Array.from(new Set([...idsArr]));
-      chrome.storage.sync.set({ "ids": newIdsArr.join("\n") });
+      chrome.storage.local.set({ "ids": newIdsArr});
     });
   }
 

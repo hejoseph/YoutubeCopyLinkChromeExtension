@@ -7,7 +7,7 @@ const idsTextArea = document.getElementById('ids');
 const copyMessage = document.getElementById('copyMessage');
 
 
-chrome.storage.sync.get(['params', 'listLinks', 'ids'], function (result) {
+chrome.storage.sync.get(['params', 'listLinks'], function (result) {
   if (result.params) {
     paramsTextArea.value = result.params;
   }
@@ -22,9 +22,17 @@ chrome.storage.sync.get(['params', 'listLinks', 'ids'], function (result) {
     listLinksTextArea.style.height = (15*newText.split("\n").length)+"px";
   }
   if (result.ids) {
-    idsTextArea.value = result.ids
+    idsTextArea.value = result.ids.join("\n");
   }
 });
+
+
+chrome.storage.local.get(['ids'], function (result) {
+  if (result.ids) {
+    idsTextArea.value = result.ids.join("\n");
+  }
+});
+
 
 save.addEventListener('click', (event) => {
   const params = paramsTextArea.value;
@@ -34,7 +42,6 @@ save.addEventListener('click', (event) => {
 
   const ids = idsTextArea.value;
   let idsArr = [...new Set(ids.split('\n').filter(Boolean))];
-  let newIds = idsArr.join('\n');
 
   const lines = listLinksTextArea.value;
   const result = {};
@@ -54,10 +61,16 @@ save.addEventListener('click', (event) => {
   
 
   paramsTextArea.value = newParams;
-  idsTextArea.value = newIds;
-  chrome.storage.sync.set({ 'params': newParams, 'listLinks': result, 'ids': newIds }, function () {
+  idsTextArea.value = idsArr.join("\n");
+  chrome.storage.sync.set({ 'params': newParams, 'listLinks': result}, function () {
     console.log('Text saved to Chrome storage');
   });
+
+
+  chrome.storage.local.set({'ids': idsArr }, function () {
+    console.log('Text saved to Chrome storage');
+  });
+
 });
 
 
