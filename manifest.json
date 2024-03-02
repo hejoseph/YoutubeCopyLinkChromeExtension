@@ -3,7 +3,7 @@
   "description": "Help you classify youtube links for download later",
   "version": "1.0",
   "manifest_version": 3,
-  "permissions": ["contextMenus", "storage"],
+  "permissions": ["activeTab","contextMenus", "storage"],
   "background": {
     "service_worker": "background.js",
     "type": "module"
@@ -11,6 +11,12 @@
   "action": {
     "default_popup": "popup.html"
   },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["js/content.js"]
+    }
+  ],
   "icons": {
     "16": "globalGoogle16.png",
     "48": "globalGoogle48.png",
