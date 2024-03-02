@@ -76,6 +76,23 @@ chrome.contextMenus.onClicked.addListener((item, tab) => {
 
   const match = url.match(/^(https:\/\/www\.youtube\.com\/watch\?v=.{11}).*/);
   url =  match ? match[1] : url;
+
+
+  const regex = /v=(.{11})/;
+  const matched = url.match(regex);
+  const video_id = matched ? matched[1] : null;
+  if(video_id!=null){
+    chrome.storage.sync.get("ids", function (promise) {
+      let idsArr = [];
+      if(idsArr.length!=0){
+        promise.ids.split("\n")
+      }
+      idsArr.push(video_id);
+      let newIdsArr = Array.from(new Set([...idsArr]));
+      chrome.storage.sync.set({ "ids": newIdsArr.join("\n") });
+    });
+  }
+
   chrome.storage.sync.get("listLinks", function (promise) {
     const listLinks = promise.listLinks;
     let newListLinks;

@@ -3,15 +3,15 @@ const clear = document.getElementById('clear');
 const copy = document.getElementById('copy');
 const paramsTextArea = document.getElementById('params');
 const listLinksTextArea = document.getElementById('listLinks');
+const idsTextArea = document.getElementById('ids');
 const copyMessage = document.getElementById('copyMessage');
 
 
-chrome.storage.sync.get(['params', 'listLinks'], function (result) {
+chrome.storage.sync.get(['params', 'listLinks', 'ids'], function (result) {
   if (result.params) {
     paramsTextArea.value = result.params;
   }
   if (result.listLinks) {
-
     let listObj = result.listLinks
     const newText = Object.entries(listObj)
     .sort(([keyA], [keyB]) => keyA.localeCompare(keyB))
@@ -21,6 +21,9 @@ chrome.storage.sync.get(['params', 'listLinks'], function (result) {
     listLinksTextArea.value = newText;
     listLinksTextArea.style.height = (15*newText.split("\n").length)+"px";
   }
+  if (result.ids) {
+    idsTextArea.value = result.ids
+  }
 });
 
 save.addEventListener('click', (event) => {
@@ -28,6 +31,10 @@ save.addEventListener('click', (event) => {
   let paramsArr = [...new Set(params.split('\n').filter(Boolean))];
   paramsArr.sort((a, b) => a.localeCompare(b, 'en', { numeric: true }));
   let newParams = paramsArr.join("\n");
+
+  const ids = idsTextArea.value;
+  let idsArr = [...new Set(ids.split('\n').filter(Boolean))];
+  let newIds = idsArr.join('\n');
 
   const lines = listLinksTextArea.value;
   const result = {};
@@ -47,7 +54,8 @@ save.addEventListener('click', (event) => {
   
 
   paramsTextArea.value = newParams;
-  chrome.storage.sync.set({ 'params': newParams, 'listLinks': result }, function () {
+  idsTextArea.value = newIds;
+  chrome.storage.sync.set({ 'params': newParams, 'listLinks': result, 'ids': newIds }, function () {
     console.log('Text saved to Chrome storage');
   });
 });
